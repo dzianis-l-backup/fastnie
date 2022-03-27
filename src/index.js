@@ -1,7 +1,7 @@
-import App from './components/app.js'
+import { App as AppRedux } from './redux/app'
 
 function init() {
-    ReactDOM.render(<App />, document.querySelector('#app'))
+    ReactDOM.render(<AppRedux />, document.querySelector('#app'))
 }
 
 init()

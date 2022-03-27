@@ -13,12 +13,21 @@
         "react"
     ],
     "rules": {
-        "no-multiple-empty-lines": "error"
+        "no-multiple-empty-lines": "error",
+        "no-restricted-imports": [
+            "error",
+            {
+                "patterns": [
+                    "@mui/*/*/*"
+                ]
+            }
+        ]
     },
     "parser": "@babel/eslint-parser",
     "globals": {
         "ReactDOM": false,
         "React": false,
-        "PropTypes": false
+        "PropTypes": false,
+        "ENV": false
     }
 }
