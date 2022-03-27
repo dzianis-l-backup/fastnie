@@ -2,11 +2,13 @@ import { Box, Grid, IconButton, TextField } from '@mui/material'
 import { Add } from '@mui/icons-material'
 
 const propTypes = {
-    onHandleTextChange: PropTypes.func,
+    onTextChange: PropTypes.func,
+    onFilterChange: PropTypes.func,
     onTodoAdd: PropTypes.func,
+    onEnterPress: PropTypes.func,
     todoText: PropTypes.string,
 }
-export function TodosPanelView({ onHandleTextChange, onTodoAdd, todoText }) {
+export function TodosPanelView({ onTextChange, onFilterChange, onTodoAdd, onEnterPress, todoText }) {
     return (
         <Box sx={{ display: 'inline-block', border: '2px solid #89b0f0', borderRadius: '10px', p: 2 }}>
             <Grid container spacing={0} direction="row" alignItems="end" justifyContent="center">
@@ -15,12 +17,14 @@ export function TodosPanelView({ onHandleTextChange, onTodoAdd, todoText }) {
                     label="Todo task"
                     value={todoText}
                     sx={{ mr: 1 }}
-                    onChange={onHandleTextChange}
+                    onChange={onTextChange}
+                    onKeyDown={onEnterPress}
                 />
                 <IconButton color="primary" onClick={onTodoAdd}>
                     <Add />
                 </IconButton>
             </Grid>
+            <TextField variant="standard" label="Filter" sx={{ mr: 1 }} onChange={onFilterChange} />
         </Box>
     )
 }
