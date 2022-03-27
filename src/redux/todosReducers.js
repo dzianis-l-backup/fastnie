@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import { ACTIONS } from './todosActions'
 import { v4 } from 'uuid'
+import { produce } from 'immer'
 
 const addTodos = (state = {}, action) => {
     const { todos = [], todosText } = state
@@ -8,7 +9,10 @@ const addTodos = (state = {}, action) => {
     if (ACTIONS.TODOS_ADD === action?.type && todosText) {
         const newTodo = { text: todosText, id: v4(), isChecked: false }
 
-        return { ...state, todos: [...todos, newTodo], todosText: '' }
+        return produce(state, (draft) => {
+            draft.todos.push(newTodo)
+            draft.todosText = ''
+        })
     }
 
     return { ...state, todos }
@@ -25,12 +29,9 @@ const toggleTodos = (state = {}, action) => {
             return state
         }
 
-        const todo = todos[todoIndex]
-        const nextTodos = [...todos]
-        const nextTodo = { ...todo, isChecked }
-        nextTodos.splice(todoIndex, 1, nextTodo)
-
-        return { ...state, todos: nextTodos }
+        return produce(state, (draft) => {
+            draft.todos[todoIndex].isChecked = isChecked
+        })
     }
 
     return { ...state, todos }
