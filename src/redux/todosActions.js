@@ -1,8 +1,9 @@
 export const ACTIONS = {
     TODOS_ADD: 'todos/add',
     TODOS_TOGGLE: 'todos/toggle',
-    FILTER: 'FILTER',
-    TODOS_TEXT: 'todo/text',
+    TODOS_TEXT: 'todos/text',
+    FILTER: 'filter',
+    VIEW: 'view',
 }
 
 function getActionTemplate(type, payload) {
@@ -23,4 +24,8 @@ export function getActionTodosAdd() {
 
 export function getActionsTodosToggle(id, isChecked) {
     return getActionTemplate(ACTIONS.TODOS_TOGGLE, { id, isChecked })
+}
+
+export function getActionsTodosView(id, variant) {
+    return getActionTemplate(ACTIONS.VIEW, variant)
 }

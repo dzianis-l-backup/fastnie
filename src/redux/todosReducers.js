@@ -3,6 +3,8 @@ import { ACTIONS } from './todosActions'
 import { v4 } from 'uuid'
 import { produce } from 'immer'
 
+const view = doActionTemplate(ACTIONS.VIEW, 'text', (view) => (view === 'text' ? 'card' : 'text'))
+
 const addTodos = (state = {}, action) => {
     const { todos = [], todosText } = state
 
@@ -67,4 +69,4 @@ function composeReducers(...funcs) {
     }
 }
 
-export const reducer = composeReducers(combineReducers({ filter, todosText }), addTodos, toggleTodos)
+export const reducer = composeReducers(combineReducers({ filter, todosText, view }), addTodos, toggleTodos)

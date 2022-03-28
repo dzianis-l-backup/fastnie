@@ -1,6 +1,6 @@
 import { Container, Grid, Box, Typography } from '@mui/material'
-import { TodosPanel } from './todosPanel'
-import { TodosList } from './todosList'
+import { TodosPanel } from './panel/todosPanel'
+import { TodosList } from './list/todosList'
 
 export function TodosView() {
     return (
