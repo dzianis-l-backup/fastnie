@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { ACTIONS } from './todosActions'
 import { v4 } from 'uuid'
 import { produce } from 'immer'
+import { createSlice } from '@reduxjs/toolkit'
 
 const view = doActionTemplate(ACTIONS.VIEW, 'text', (view) => (view === 'text' ? 'card' : 'text'))
 
@@ -24,7 +25,7 @@ const toggleTodos = (state = {}, action) => {
     const { todos = [] } = state
 
     if (ACTIONS.TODOS_TOGGLE === action?.type) {
-        const { id, isChecked } = action.payload
+        const { id } = action.payload
         const todoIndex = todos.findIndex((todo) => todo.id === id)
 
         if (todoIndex === -1) {
@@ -32,14 +33,12 @@ const toggleTodos = (state = {}, action) => {
         }
 
         return produce(state, (draft) => {
-            draft.todos[todoIndex].isChecked = isChecked
+            draft.todos[todoIndex].isChecked = !draft.todos[todoIndex].isChecked
         })
     }
 
     return { ...state, todos }
 }
-
-const filter = doActionTemplate(ACTIONS.FILTER, '', (_, action) => action.payload)
 
 const todosText = doActionTemplate(ACTIONS.TODOS_TEXT, '', (_, action) => {
     const { payload: text } = action
@@ -69,4 +68,21 @@ function composeReducers(...funcs) {
     }
 }
 
-export const reducer = composeReducers(combineReducers({ filter, todosText, view }), addTodos, toggleTodos)
+const filterSlice = createSlice({
+    name: 'filter',
+    initialState: '',
+    reducers: {
+        filter: (filter, action) => {
+            filter = action.payload
+            return filter
+        },
+    },
+})
+
+export const { filter: filterAction } = filterSlice.actions
+
+export const reducer = composeReducers(
+    combineReducers({ filter: filterSlice.reducer, todosText, view }),
+    addTodos,
+    toggleTodos,
+)

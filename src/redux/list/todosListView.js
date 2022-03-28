@@ -1,5 +1,5 @@
 import React from 'react'
-import { List } from '@mui/material'
+import { List, Grid } from '@mui/material'
 import { TodosListItem } from './todosListItem'
 // import TodosCardItem from './todosCardItem'
 
@@ -19,22 +19,40 @@ export function TodosListView({ todos, view }) {
     const renderChild = React.useCallback(({ id }) => {
         return <TodosListItem key={id} id={id} />
     }, [])
+    const renderContent = React.useCallback(() => {
+        if (view === 'text') {
+            const canRender = Array.isArray(todos) && todos.length
 
-    if (view === 'text') {
-        const canRender = Array.isArray(todos) && todos.length
+            if (!canRender) {
+                return null
+            }
 
-        if (!canRender) {
-            return null
+            return <List dense={true}>{todos.map(renderChild)}</List>
         }
 
-        return <List dense={true}>{todos.map(renderChild)}</List>
-    }
+        return todos.map((todo) => (
+            <React.Suspense key={todo.id} fallback={'Loading...'}>
+                <TodosCardItem id={todo.id} />
+            </React.Suspense>
+        ))
+    }, [renderChild, todos, view])
 
-    return todos.map((todo) => (
-        <React.Suspense key={todo.id} fallback={'Loading...'}>
-            <TodosCardItem id={todo.id} />
-        </React.Suspense>
-    ))
+    const gridProps =
+        view === 'card'
+            ? {
+                  direction: 'row',
+                  justifyContent: 'flex-start',
+              }
+            : {
+                  direction: 'column',
+                  justifyContent: 'flex-start',
+              }
+
+    return (
+        <Grid container spacing={0} alignItems="center" {...gridProps}>
+            {renderContent()}
+        </Grid>
+    )
 }
 
 TodosListView.propTypes = propTypes

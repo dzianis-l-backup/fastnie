@@ -1,7 +1,8 @@
 import { TodosPanelView } from '../panel/todosPanelView'
 import { useSelector } from 'react-redux'
 import { useActions } from '../todosHooks'
-import { getActionTodoText, getActionTodosAdd, getActionTodoFilter, getActionsTodosView } from '../todosActions'
+import { getActionTodoText, getActionTodosAdd, getActionsTodosView } from '../todosActions'
+import { filterAction } from '../todosReducers'
 
 export function TodosPanel() {
     const todoText = useSelector((state) => state.todosText)
@@ -9,19 +10,16 @@ export function TodosPanel() {
     const {
         getActionTodoText: dispatchTodoText,
         getActionTodosAdd: dispatchTodosAdd,
-        getActionTodoFilter: dispatchTodoFilter,
         getActionsTodosView: dispatchTodosView,
+        filterAction: dispatchFilter,
     } = useActions({
         getActionTodoText,
         getActionTodosAdd,
-        getActionTodoFilter,
         getActionsTodosView,
+        filterAction,
     })
     const handleTextChange = React.useCallback((event) => dispatchTodoText(event.target.value), [dispatchTodoText])
-    const handleFilterChange = React.useCallback(
-        (event) => dispatchTodoFilter(event.target.value),
-        [dispatchTodoFilter],
-    )
+    const handleFilterChange = React.useCallback((event) => dispatchFilter(event.target.value), [dispatchFilter])
     const handleTodoAdd = React.useCallback(() => dispatchTodosAdd(), [dispatchTodosAdd])
     const handleEnterPress = React.useCallback(
         (event) => {

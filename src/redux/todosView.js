@@ -14,9 +14,7 @@ export function TodosView() {
                 <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center">
                     <TodosPanel />
                 </Grid>
-                <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center">
-                    <TodosList />
-                </Grid>
+                <TodosList />
             </Grid>
         </Container>
     )

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardActions, ListItemText, Checkbox } from '@mui/material'
+import { Card, CardContent, CardActions, Button, Typography } from '@mui/material'
 
 const propTypes = {
     todo: PropTypes.shape({
@@ -12,13 +12,17 @@ const propTypes = {
 export function TodosCardItemView({ onTodosToggle, todo }) {
     const { isChecked, text, id } = todo
     return (
-        <Card sx={{ minWidth: 275 }} key={id}>
-            <CardContent>{text}</CardContent>
+        <Card sx={{ m: 2, p: 1 }} key={id}>
+            <CardContent>
+                <Typography variant="caption" gutterBottom>
+                    {id}
+                </Typography>
+                <Typography variant="body1">{text}</Typography>
+            </CardContent>
             <CardActions>
-                <Checkbox onChange={onTodosToggle(id)} checked={isChecked} />
-                <ListItemText sx={isChecked ? { textDecoration: 'line-through' } : null}>
+                <Button sx={{ textTransform: 'none' }} onClick={onTodosToggle(id)} variant="outlined">
                     {isChecked ? 'Done' : 'Undone'}
-                </ListItemText>
+                </Button>
             </CardActions>
         </Card>
     )
