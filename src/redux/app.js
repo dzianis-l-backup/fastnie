@@ -1,10 +1,9 @@
 import { Todos } from './todos'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
 import { reducer } from './todosReducers'
 
-const reduxDevTools = !ENV.production && window.__REDUX_DEVTOOLS_EXTENSION__?.()
-const store = createStore(reducer, reduxDevTools)
+const store = configureStore({ reducer })
 
 export function App() {
     return (

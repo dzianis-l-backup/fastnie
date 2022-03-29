@@ -1,6 +1,21 @@
 import { combineReducers } from 'redux'
 import { v4 } from 'uuid'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+
+const fetchTodos = createAsyncThunk('todos/fetch/get', async () => {
+    const todos = await fetch('https://jsonplaceholder.typicode.com/todos').then((response) => response.json())
+
+    return (todos || []).map((todo) => {
+        const { userId, completed, title, id } = todo
+
+        return {
+            id,
+            userId,
+            isChecked: completed,
+            text: title,
+        }
+    })
+})
 
 const todosSlice = createSlice({
     name: 'todos',
@@ -44,6 +59,11 @@ const todosSlice = createSlice({
             }
         },
     },
+    extraReducers: {
+        [fetchTodos.fulfilled]: (state, action) => {
+            state.todos = action.payload
+        },
+    },
 })
 
 const filterSlice = createSlice({
@@ -59,6 +79,8 @@ const filterSlice = createSlice({
 
 export const { filter: filterAction } = filterSlice.actions
 export const { view: viewAction, text: textAction, toggle: toggleAction, add: addAction } = todosSlice.actions
+export { fetchTodos }
+export const reducer = composeReducers(combineReducers({ filter: filterSlice.reducer }), todosSlice.reducer)
 
 function composeReducers(...funcs) {
     return (state, action) => {
@@ -71,5 +93,3 @@ function composeReducers(...funcs) {
         return nextState
     }
 }
-
-export const reducer = composeReducers(combineReducers({ filter: filterSlice.reducer }), todosSlice.reducer)

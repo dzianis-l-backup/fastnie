@@ -11,6 +11,8 @@ const propTypes = {
 
 export function TodosCardItemView({ onTodosToggle, todo }) {
     const { isChecked, text, id } = todo
+    const buttonProps = isChecked ? { color: 'success' } : null
+
     return (
         <Card sx={{ m: 2, p: 1 }} key={id}>
             <CardContent>
@@ -24,6 +26,7 @@ export function TodosCardItemView({ onTodosToggle, todo }) {
                     sx={{ textTransform: 'none' }}
                     onClick={onTodosToggle(id)}
                     variant={isChecked ? 'contained' : 'outlined'}
+                    {...buttonProps}
                 >
                     {isChecked ? 'Done' : 'Undone'}
                 </Button>
