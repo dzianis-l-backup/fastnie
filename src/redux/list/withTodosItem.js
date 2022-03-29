@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useActions } from '../todosHooks'
-import { getActionsTodosToggle } from '../todosActions'
+import { toggleAction } from '../todosReducers'
 
 const propTypes = {
     id: PropTypes.string.isRequired,
@@ -9,14 +9,14 @@ const propTypes = {
 export function withTodosItem(WrappedComponent) {
     function TodosItem({ id }) {
         const todo = useSelector((state) => state.todos.find((todo) => todo.id === id))
-        const { getActionsTodosToggle: dispatchTodosToggle } = useActions({ getActionsTodosToggle })
+        const { toggleAction: dispatchToggle } = useActions({ toggleAction })
         const onTodosToggle = React.useCallback(
             (id) => {
                 return (event) => {
-                    dispatchTodosToggle(id, event.target.checked)
+                    dispatchToggle(id, event.target.checked)
                 }
             },
-            [dispatchTodosToggle],
+            [dispatchToggle],
         )
 
         return <WrappedComponent todo={todo} onTodosToggle={onTodosToggle} />

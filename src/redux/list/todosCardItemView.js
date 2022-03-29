@@ -20,7 +20,11 @@ export function TodosCardItemView({ onTodosToggle, todo }) {
                 <Typography variant="body1">{text}</Typography>
             </CardContent>
             <CardActions>
-                <Button sx={{ textTransform: 'none' }} onClick={onTodosToggle(id)} variant="outlined">
+                <Button
+                    sx={{ textTransform: 'none' }}
+                    onClick={onTodosToggle(id)}
+                    variant={isChecked ? 'contained' : 'outlined'}
+                >
                     {isChecked ? 'Done' : 'Undone'}
                 </Button>
             </CardActions>

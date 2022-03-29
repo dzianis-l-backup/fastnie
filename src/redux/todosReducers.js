@@ -1,72 +1,50 @@
 import { combineReducers } from 'redux'
-import { ACTIONS } from './todosActions'
 import { v4 } from 'uuid'
-import { produce } from 'immer'
 import { createSlice } from '@reduxjs/toolkit'
 
-const view = doActionTemplate(ACTIONS.VIEW, 'text', (view) => (view === 'text' ? 'card' : 'text'))
+const todosSlice = createSlice({
+    name: 'todos',
+    initialState: {
+        todos: [],
+        view: 'text',
+        todosText: '',
+    },
+    reducers: {
+        toggle: {
+            reducer: (state = {}, action) => {
+                const todos = state.todos
+                const { id } = action.payload
+                const todoIndex = todos.findIndex((todo) => todo.id === id)
 
-const addTodos = (state = {}, action) => {
-    const { todos = [], todosText } = state
+                if (todoIndex === -1) {
+                    return
+                }
 
-    if (ACTIONS.TODOS_ADD === action?.type && todosText) {
-        const newTodo = { text: todosText, id: v4(), isChecked: false }
+                todos[todoIndex].isChecked = !todos[todoIndex].isChecked
+            },
+            prepare: (id) => {
+                return { payload: { id } }
+            },
+        },
+        view: (state) => {
+            const nextView = state.view === 'text' ? 'card' : 'text'
+            state.view = nextView
+        },
+        text: {
+            reducer: (state = {}, action) => {
+                state.todosText = action.payload
+            },
+        },
+        add: (state) => {
+            if (state.todosText) {
+                const newTodo = { text: state.todosText, id: v4(), isChecked: false }
 
-        return produce(state, (draft) => {
-            draft.todos.push(newTodo)
-            draft.todosText = ''
-        })
-    }
-
-    return { ...state, todos }
-}
-
-const toggleTodos = (state = {}, action) => {
-    const { todos = [] } = state
-
-    if (ACTIONS.TODOS_TOGGLE === action?.type) {
-        const { id } = action.payload
-        const todoIndex = todos.findIndex((todo) => todo.id === id)
-
-        if (todoIndex === -1) {
-            return state
-        }
-
-        return produce(state, (draft) => {
-            draft.todos[todoIndex].isChecked = !draft.todos[todoIndex].isChecked
-        })
-    }
-
-    return { ...state, todos }
-}
-
-const todosText = doActionTemplate(ACTIONS.TODOS_TEXT, '', (_, action) => {
-    const { payload: text } = action
-
-    return text
+                state.todos.push(newTodo)
+                state.todosText = ''
+            }
+        },
+    },
 })
-
-function doActionTemplate(type, initialValue, doAction) {
-    return function (state = initialValue, action) {
-        if (type === action?.type) {
-            return doAction(state, action)
-        }
-
-        return state
-    }
-}
-
-function composeReducers(...funcs) {
-    return (state, action) => {
-        const nextState = funcs.reverse().reduce((acc, func) => {
-            const nextState = func(acc, action)
-
-            return { ...acc, ...nextState }
-        }, state)
-
-        return nextState
-    }
-}
 
 const filterSlice = createSlice({
     name: 'filter',
@@ -80,9 +58,18 @@ const filterSlice = createSlice({
 })
 
 export const { filter: filterAction } = filterSlice.actions
+export const { view: viewAction, text: textAction, toggle: toggleAction, add: addAction } = todosSlice.actions
 
-export const reducer = composeReducers(
-    combineReducers({ filter: filterSlice.reducer, todosText, view }),
-    addTodos,
-    toggleTodos,
-)
+function composeReducers(...funcs) {
+    return (state, action) => {
+        const nextState = funcs.reverse().reduce((acc, func) => {
+            const nextState = func(acc, action)
+
+            return { ...acc, ...nextState }
+        }, state)
+
+        return nextState
+    }
+}
+
+export const reducer = composeReducers(combineReducers({ filter: filterSlice.reducer }), todosSlice.reducer)

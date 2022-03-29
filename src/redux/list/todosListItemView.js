@@ -12,7 +12,12 @@ const propTypes = {
 export function TodosListItemView({ onTodosToggle, todo }) {
     const { id, text, isChecked } = todo
     return (
-        <ListItem key={id}>
+        <ListItem
+            sx={{
+                p: 0,
+            }}
+            key={id}
+        >
             <Checkbox onChange={onTodosToggle(id)} checked={isChecked} />
             <ListItemText sx={isChecked ? { textDecoration: 'line-through' } : null}>{text}</ListItemText>
         </ListItem>

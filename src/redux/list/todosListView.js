@@ -1,7 +1,6 @@
 import React from 'react'
-import { List, Grid } from '@mui/material'
+import { List, Grid, CircularProgress } from '@mui/material'
 import { TodosListItem } from './todosListItem'
-// import TodosCardItem from './todosCardItem'
 
 const TodosCardItem = React.lazy(() => import('./todosCardItem'))
 
@@ -31,25 +30,21 @@ export function TodosListView({ todos, view }) {
         }
 
         return todos.map((todo) => (
-            <React.Suspense key={todo.id} fallback={'Loading...'}>
+            <React.Suspense
+                key={todo.id}
+                fallback={
+                    <Grid alignItems="flex-start" direction={'row'} justifyContent={'center'}>
+                        <CircularProgress color="success" />
+                    </Grid>
+                }
+            >
                 <TodosCardItem id={todo.id} />
             </React.Suspense>
         ))
     }, [renderChild, todos, view])
 
-    const gridProps =
-        view === 'card'
-            ? {
-                  direction: 'row',
-                  justifyContent: 'flex-start',
-              }
-            : {
-                  direction: 'column',
-                  justifyContent: 'flex-start',
-              }
-
     return (
-        <Grid container spacing={0} alignItems="center" {...gridProps}>
+        <Grid container spacing={0} alignItems="center" direction={'row'} justifyContent={'flex-start'}>
             {renderContent()}
         </Grid>
     )
