@@ -16,10 +16,10 @@ export function TodosCardItemView({ onTodosToggle, todo }) {
     return (
         <Card sx={{ m: 2, p: 1 }} key={id}>
             <CardContent>
+                <Typography variant="body1">{text}</Typography>
                 <Typography variant="caption" gutterBottom>
                     {id}
                 </Typography>
-                <Typography variant="body1">{text}</Typography>
             </CardContent>
             <CardActions>
                 <Button

@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, Grid, CircularProgress } from '@mui/material'
+import { List, Grid, CircularProgress, ListSubheader } from '@mui/material'
 import { TodosListItem } from './todosListItem'
 
 const TodosCardItem = React.lazy(() => import('./todosCardItem'))
@@ -26,7 +26,17 @@ export function TodosListView({ todos, view }) {
                 return null
             }
 
-            return <List dense={true}>{todos.map(renderChild)}</List>
+            return (
+                <List
+                    sx={{
+                        p: 0,
+                    }}
+                    subheader={<ListSubheader component="div">Todos list</ListSubheader>}
+                    dense={true}
+                >
+                    {todos.map(renderChild)}
+                </List>
+            )
         }
 
         return todos.map((todo) => (

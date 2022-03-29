@@ -15,10 +15,11 @@ export function TodosListItemView({ onTodosToggle, todo }) {
 
     return (
         <ListItem
+            key={id}
             sx={{
                 p: 0,
+                bgcolor: '#fafafa',
             }}
-            key={id}
         >
             <Checkbox onChange={onTodosToggle(id)} checked={isChecked} {...checkboxProps} />
             <ListItemText sx={isChecked ? { textDecoration: 'line-through' } : null}>{text}</ListItemText>
