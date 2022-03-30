@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, Grid, CircularProgress, ListSubheader } from '@mui/material'
+import { List, Grid, Skeleton, ListSubheader } from '@mui/material'
 import { TodosListItem } from './todosListItem'
 
 const TodosCardItem = React.lazy(() => import('./todosCardItem'))
@@ -42,11 +42,7 @@ export function TodosListView({ todos, view }) {
         return todos.map((todo) => (
             <React.Suspense
                 key={todo.id}
-                fallback={
-                    <Grid alignItems="flex-start" direction={'row'} justifyContent={'center'}>
-                        <CircularProgress color="success" />
-                    </Grid>
-                }
+                fallback={<Skeleton variant="rectangular" width={160} height={144} sx={{ m: 2 }} />}
             >
                 <TodosCardItem id={todo.id} />
             </React.Suspense>
@@ -54,7 +50,7 @@ export function TodosListView({ todos, view }) {
     }, [renderChild, todos, view])
 
     return (
-        <Grid container spacing={0} alignItems="center" direction={'row'} justifyContent={'flex-start'}>
+        <Grid container spacing={0} alignItems="center" direction={'row'} justifyContent={'center'}>
             {renderContent()}
         </Grid>
     )

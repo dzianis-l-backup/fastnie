@@ -14,7 +14,7 @@ export function TodosCardItemView({ onTodosToggle, todo }) {
     const buttonProps = isChecked ? { color: 'success' } : null
 
     return (
-        <Card sx={{ m: 2, p: 1 }} key={id}>
+        <Card sx={{ m: 1, p: 1 }} key={id}>
             <CardContent>
                 <Typography variant="body1">{text}</Typography>
                 <Typography variant="caption" gutterBottom>

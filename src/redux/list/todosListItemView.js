@@ -1,4 +1,5 @@
-import { Checkbox, ListItem, ListItemText } from '@mui/material'
+import { Checkbox, ListItem, ListItemText, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 const propTypes = {
     todo: PropTypes.shape({
@@ -23,6 +24,9 @@ export function TodosListItemView({ onTodosToggle, todo }) {
         >
             <Checkbox onChange={onTodosToggle(id)} checked={isChecked} {...checkboxProps} />
             <ListItemText sx={isChecked ? { textDecoration: 'line-through' } : null}>{text}</ListItemText>
+            <Link to={`/details/${id}`}>
+                <Typography variant="body1">Show details</Typography>
+            </Link>
         </ListItem>
     )
 }
