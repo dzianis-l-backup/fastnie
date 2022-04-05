@@ -3,8 +3,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-module.exports = (env) => {
-    console.log('environment', env)
+module.exports = () => {
     return {
         entry: {
             index: './src/index.tsx',
@@ -90,16 +89,12 @@ module.exports = (env) => {
                 title: 'Todos',
             }),
             new CleanWebpackPlugin(),
-
             new webpack.HotModuleReplacementPlugin(),
             new webpack.ProvidePlugin({
                 React: 'react',
                 ReactDOM: 'react-dom',
                 render: ['react-dom', 'render'],
                 PropTypes: 'prop-types',
-            }),
-            new webpack.DefinePlugin({
-                'ENV.production': JSON.stringify(env.production),
             }),
         ],
     }

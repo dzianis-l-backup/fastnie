@@ -10,13 +10,12 @@ export function Router() {
                 <Route path="/" element={<Todos />} />
                 <Route
                     path="/details"
-                    exact
                     element={
                         <Typography component="h1" variant="h1">
                             Todos Details
                         </Typography>
                     }
-                ></Route>
+                />
                 <Route path="/details/:id" element={<Details />} />
             </Routes>
         </BrowserRouter>
