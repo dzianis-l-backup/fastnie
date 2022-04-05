@@ -1,21 +1,13 @@
-import { TodosView } from './todosView'
+import { Todos } from './todos'
 import { Details } from './details/details'
-import { fetchTodos } from './todosReducers'
-import { useActions } from './todosHooks'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Typography } from '@mui/material'
 
-export function Todos() {
-    const { fetchTodos: _fetchTodos } = useActions({ fetchTodos })
-
-    React.useEffect(() => {
-        _fetchTodos()
-    }, [_fetchTodos])
-
+export function Router() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<TodosView />} />
+                <Route path="/" element={<Todos />} />
                 <Route
                     path="/details"
                     exact

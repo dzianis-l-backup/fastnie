@@ -1,17 +1,9 @@
 import { Card, CardContent, CardActions, Button, Typography } from '@mui/material'
+import { Todo } from '../store'
+import { IOnTodosToggleClick } from './listTypes'
 
-const propTypes = {
-    todo: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        isChecked: PropTypes.bool,
-    }),
-    onTodosToggle: PropTypes.func,
-}
-
-export function TodosCardItemView({ onTodosToggle, todo }) {
+export function CardItemView({ onTodosToggle, todo }: { todo: Todo; onTodosToggle: IOnTodosToggleClick }) {
     const { isChecked, text, id } = todo
-    const buttonProps = isChecked ? { color: 'success' } : null
 
     return (
         <Card sx={{ m: 1, p: 1 }} key={id}>
@@ -23,10 +15,10 @@ export function TodosCardItemView({ onTodosToggle, todo }) {
             </CardContent>
             <CardActions>
                 <Button
+                    color={'success'}
                     sx={{ textTransform: 'none' }}
                     onClick={onTodosToggle(id)}
                     variant={isChecked ? 'contained' : 'outlined'}
-                    {...buttonProps}
                 >
                     {isChecked ? 'Done' : 'Undone'}
                 </Button>
@@ -34,5 +26,3 @@ export function TodosCardItemView({ onTodosToggle, todo }) {
         </Card>
     )
 }
-
-TodosCardItemView.propTypes = propTypes

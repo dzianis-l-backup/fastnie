@@ -1,16 +1,8 @@
 import { Box, Grid, IconButton, TextField, Button } from '@mui/material'
 import { Add } from '@mui/icons-material'
+import { TodoText, View } from '../store'
 
-const propTypes = {
-    onTextChange: PropTypes.func,
-    onFilterChange: PropTypes.func,
-    onTodoAdd: PropTypes.func,
-    onEnterPress: PropTypes.func,
-    onViewChange: PropTypes.func,
-    todoText: PropTypes.string.isRequired,
-    view: PropTypes.string.isRequired,
-}
-export function TodosPanelView({
+export function PanelView({
     onTextChange,
     onViewChange,
     onFilterChange,
@@ -18,6 +10,14 @@ export function TodosPanelView({
     onEnterPress,
     todoText,
     view,
+}: {
+    onTextChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    onViewChange: React.MouseEventHandler<HTMLButtonElement>
+    onFilterChange: React.ChangeEventHandler<HTMLInputElement>
+    onTodoAdd: React.MouseEventHandler<HTMLButtonElement>
+    onEnterPress: React.KeyboardEventHandler<HTMLInputElement>
+    todoText: TodoText
+    view: View
 }) {
     const renderRow = React.useCallback((...items) => {
         return (
@@ -31,6 +31,7 @@ export function TodosPanelView({
         <Box sx={{ display: 'inline-block', border: '2px solid #89b0f0', borderRadius: '10px', p: 2 }}>
             {renderRow(
                 <TextField
+                    key="textField"
                     variant="standard"
                     label="Todo task"
                     value={todoText}
@@ -38,7 +39,7 @@ export function TodosPanelView({
                     onChange={onTextChange}
                     onKeyDown={onEnterPress}
                 />,
-                <IconButton color="primary" onClick={onTodoAdd}>
+                <IconButton key="addTodo" color="primary" onClick={onTodoAdd}>
                     <Add />
                 </IconButton>,
             )}
@@ -51,5 +52,3 @@ export function TodosPanelView({
         </Box>
     )
 }
-
-TodosPanelView.propTypes = propTypes

@@ -7,7 +7,7 @@ module.exports = (env) => {
     console.log('environment', env)
     return {
         entry: {
-            index: './src/index.js',
+            index: './src/index.tsx',
         },
 
         mode: env.production ? 'production' : 'development',
@@ -18,8 +18,18 @@ module.exports = (env) => {
             path: path.resolve(__dirname, 'dist'),
         },
 
+        resolve: {
+            extensions: ['.ts', '.tsx', '.js', '.json'],
+        },
+
         module: {
             rules: [
+                {
+                    test: /\.ts(x)?$/,
+                    use: {
+                        loader: 'ts-loader',
+                    },
+                },
                 {
                     test: /\.m?js$/,
                     use: {
@@ -85,6 +95,7 @@ module.exports = (env) => {
             new webpack.ProvidePlugin({
                 React: 'react',
                 ReactDOM: 'react-dom',
+                render: ['react-dom', 'render'],
                 PropTypes: 'prop-types',
             }),
             new webpack.DefinePlugin({

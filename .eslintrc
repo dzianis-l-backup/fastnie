@@ -6,11 +6,14 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:react-hooks/recommended"
+        "plugin:react-hooks/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     "plugins": [
         "prettier",
-        "react"
+        "react",
+        "@typescript-eslint"
     ],
     "rules": {
         "no-multiple-empty-lines": "error",
@@ -21,13 +24,36 @@
                     "@mui/*/*/*"
                 ]
             }
-        ]
+        ],
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-unsafe-assignment": 0
     },
-    "parser": "@babel/eslint-parser",
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "project": "./tsconfig.json",
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
     "globals": {
         "ReactDOM": false,
         "React": false,
         "PropTypes": false,
         "ENV": false
+    },
+    "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [
+                ".ts",
+                ".tsx"
+            ]
+        },
+        "import/resolver": {
+            "typescript": {
+                "alwaysTryTypes": true
+            }
+        }
     }
 }

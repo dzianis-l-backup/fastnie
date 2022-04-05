@@ -1,10 +1,11 @@
 import { TodosListView } from './todosListView'
-import { useSelector } from 'react-redux'
 import { todosSelector } from './todosListSelectors'
+import { View } from '../store'
+import { useAppSelector } from '../hooks'
 
 export function TodosList() {
-    const store = useSelector((state) => state)
-    const view = useSelector((state) => state.view)
+    const store = useAppSelector((state) => state)
+    const view: View = useAppSelector((state) => state.view)
     const nextTodos = todosSelector(store)
 
     return <TodosListView todos={nextTodos} view={view} />
