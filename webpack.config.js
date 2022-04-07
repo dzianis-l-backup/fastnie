@@ -1,14 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = (env) => {
     return {
-        entry: {
-            index: './src/index.tsx',
-        },
-
         mode: env.production ? 'production' : 'development',
 
         output: {
@@ -27,23 +22,6 @@ module.exports = (env) => {
                     test: /\.ts(x)?$/,
                     use: {
                         loader: 'ts-loader',
-                    },
-                },
-                {
-                    test: /\.m?js$/,
-                    use: {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                [
-                                    '@babel/preset-env',
-                                    {
-                                        targets: '>5%',
-                                    },
-                                ],
-                                ['@babel/preset-react'],
-                            ],
-                        },
                     },
                 },
                 {
@@ -78,23 +56,16 @@ module.exports = (env) => {
         },
 
         devServer: {
-            port: 8080,
+            hot: true,
         },
 
         devtool: 'source-map',
 
         plugins: [
-            new HtmlWebpackPlugin({
-                template: 'src/index.html',
-                title: 'Todos',
-            }),
             new CleanWebpackPlugin(),
-            new webpack.HotModuleReplacementPlugin(),
             new webpack.ProvidePlugin({
                 React: 'react',
                 ReactDOM: 'react-dom',
-                render: ['react-dom', 'render'],
-                PropTypes: 'prop-types',
             }),
         ],
     }

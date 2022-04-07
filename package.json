@@ -1,44 +1,21 @@
 {
-    "name": "todos",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "name": "@fastnie/todos",
+    "private": true,
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "prebuild": "rimraf dist",
         "build": "yarn webpack serve",
-        "lint": "yarn eslint --ext .js --ext .ts --ext .tsx src/**/*.*"
+        "lint": "yarn eslint --ext .js --ext .ts --ext .tsx packages/**/*.*"
     },
     "author": "Owrlean <leadzian213@gmail.com>",
     "license": "MIT",
-    "dependencies": {
-        "@emotion/react": "^11.8.2",
-        "@emotion/styled": "^11.8.1",
-        "@mui/icons-material": "^5.5.1",
-        "@mui/material": "^5.5.1",
-        "@reduxjs/toolkit": "^1.8.0",
-        "@types/uuid": "^8.3.4",
-        "classnames": "^2.3.1",
-        "immer": "^9.0.12",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-redux": "^7.2.6",
-        "react-router-dom": "^6.2.2",
-        "redux": "^4.1.2",
-        "reselect": "^4.1.5",
-        "uuid": "^8.3.2"
-    },
     "devDependencies": {
-        "@babel/core": "^7.17.5",
-        "@babel/eslint-parser": "^7.17.0",
-        "@babel/preset-env": "^7.16.11",
-        "@babel/preset-react": "^7.16.7",
+        "@babel/core": "^7.17.8",
         "@commitlint/config-conventional": "^16.2.1",
         "@types/react-dom": "^17.0.14",
         "@types/react-redux": "^7.1.23",
         "@typescript-eslint/eslint-plugin": "^5.17.0",
         "@typescript-eslint/parser": "^5.17.0",
-        "babel-loader": "^8.2.3",
         "clean-webpack-plugin": "^4.0.0",
         "commitlint": "^16.2.1",
         "css-loader": "^6.7.1",
@@ -48,7 +25,9 @@
         "eslint-plugin-react-hooks": "^4.3.0",
         "html-webpack-plugin": "^5.5.0",
         "husky": "^7.0.4",
+        "lerna": "^4.0.0",
         "lint-staged": "^12.3.7",
+        "node-nightly": "^1.8.1",
         "prettier": "^2.6.0",
         "rimraf": "^3.0.2",
         "sass": "^1.49.9",
@@ -63,5 +42,8 @@
     "lint-staged": {
         "*.js": "eslint",
         "*.json": "yarn prettier --write"
-    }
+    },
+    "workspaces": [
+        "packages/*"
+    ]
 }

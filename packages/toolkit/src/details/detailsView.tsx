@@ -1,13 +1,7 @@
 import { Typography, Box } from '@mui/material'
+import { Todo } from '../store'
 
-const propTypes = {
-    todo: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-    }),
-}
-
-export function DetailsView({ todo }) {
+export function DetailsView({ todo }: { todo: Todo }) {
     const { text } = todo
 
     return (
@@ -19,5 +13,3 @@ export function DetailsView({ todo }) {
         </Box>
     )
 }
-
-DetailsView.propTypes = propTypes
