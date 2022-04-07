@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+yarn eslint --ext .js --ext .ts --ext .tsx src/**/*.*
+

@@ -3,3 +3,5 @@ yarn-error.log
 .vscode
 todos.txt
 /dist
+.DS_Store
+**/.DS_Store

@@ -27,7 +27,7 @@ module.exports = (env) => {
             ...globalConfig.plugins,
             new HtmlWebpackPlugin({
                 template: 'src/index.html',
-                title: 'Sagas',
+                title: 'Login',
             }),
         ],
     }

@@ -1,7 +1,7 @@
 {
-    "name": "@fastnie/todos--sagas",
+    "name": "@fastnie/todos",
     "version": "1.0.0",
-    "description": "todos redux",
+    "description": "todos",
     "main": "index.tsx",
     "devDependencies": {},
     "dependencies": {
@@ -22,14 +22,16 @@
         "uuid": "^8.3.2"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "prebuild": "rimraf dist",
-        "build": "yarn webpack serve"
+        "prebuild": "scripty",
+        "build": "scripty",
+        "lint": "scripty"
     },
     "keywords": [
-        "todos",
-        "redux/toolkit"
+        "todos"
     ],
     "author": "Owrlean <dzianisl.work@gmail.com>",
-    "license": "MIT"
+    "license": "MIT",
+    "scripty": {
+        "path": "../../scripts/packages"
+    }
 }

@@ -1,11 +1,12 @@
 {
-    "name": "@fastnie/todos",
     "private": true,
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "prebuild": "rimraf dist",
-        "build": "yarn webpack serve",
-        "lint": "yarn eslint --ext .js --ext .ts --ext .tsx packages/**/*.*"
+        "prebuild": "scripty",
+        "build": "scripty",
+        "lint": "scripty"
+    },
+    "scripty": {
+        "path": "./scripts/workspace"
     },
     "author": "Owrlean <leadzian213@gmail.com>",
     "license": "MIT",
@@ -32,6 +33,7 @@
         "rimraf": "^3.0.2",
         "sass": "^1.49.9",
         "sass-loader": "^12.6.0",
+        "scripty": "^2.1.0",
         "style-loader": "^3.3.1",
         "ts-loader": "^9.2.8",
         "typescript": "^4.6.3",
