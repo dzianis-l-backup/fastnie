@@ -1,0 +1,28 @@
+{
+    "name": "@fastnie/server",
+    "version": "1.0.0",
+    "description": "server",
+    "main": "dist/index.js",
+    "devDependencies": {
+        "@babel/cli": "^7.17.10",
+        "@babel/core": "^7.17.10",
+        "@babel/preset-env": "^7.17.10"
+    },
+    "dependencies": {},
+    "scripts": {
+        "prebuild": "scripty",
+        "lint": "scripty",
+        "build": "rimraf tsconfig.tsbuildinfo && tsc",
+        "restart": "rimraf tsconfig.tsbuildinfo && yarn build && node dist/index.js",
+        "dev": "nodemon --watch src --exec yarn restart",
+        "start": "scripty"
+    },
+    "keywords": [
+        "server"
+    ],
+    "author": "Dzianis .L <dzianisl213@gmail.com>",
+    "license": "MIT",
+    "scripty": {
+        "path": "../../scripts/packages"
+    }
+}

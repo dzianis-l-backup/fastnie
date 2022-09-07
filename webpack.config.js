@@ -59,7 +59,7 @@ module.exports = (env) => {
             hot: true,
         },
 
-        devtool: 'source-map',
+        devtool: 'eval-source-map',
 
         plugins: [
             new CleanWebpackPlugin(),

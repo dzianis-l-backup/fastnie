@@ -24,12 +24,14 @@
     "scripts": {
         "prebuild": "scripty",
         "build": "scripty",
-        "lint": "scripty"
+        "lint": "scripty",
+        "dev": "scripty",
+        "start": "scripty"
     },
     "keywords": [
         "todos"
     ],
-    "author": "Owrlean <dzianisl.work@gmail.com>",
+    "author": "Dzianis .L <leadzian213@gmail.com>",
     "license": "MIT",
     "scripty": {
         "path": "../../scripts/packages"

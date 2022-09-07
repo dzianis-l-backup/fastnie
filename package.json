@@ -6,7 +6,9 @@
     "scripts": {
         "prebuild": "scripty",
         "build": "scripty",
-        "lint": "scripty"
+        "lint": "scripty",
+        "dev": "scripty",
+        "start": "scripty"
     },
     "scripty": {
         "path": "./scripts/workspace"

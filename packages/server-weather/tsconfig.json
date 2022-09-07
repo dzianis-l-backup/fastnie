@@ -1,0 +1,16 @@
+{
+    "extends": "../../tsconfig",
+    "compilerOptions": {
+        "composite": true,
+        "target": "es5",
+        "module": "CommonJS",
+        "outDir": "dist",
+        "moduleResolution": "node",
+        "rootDir": "src",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": true,
+        "noUnusedLocals": true
+    },
+    "include": ["src"]
+}

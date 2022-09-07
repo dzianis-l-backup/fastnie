@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
-yarn webpack build
-
+yarn lerna run start

@@ -5,3 +5,6 @@ todos.txt
 /dist
 .DS_Store
 **/.DS_Store
+packages/**/dist
+commands.txt
+**/tsconfig.tsbuildinfo

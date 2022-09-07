@@ -9,5 +9,6 @@ export const Todos = () => {
     React.useEffect(() => {
         void dispatch(fetchTodos())
     }, [dispatch])
+
     return <TodosView isLoading={isLoading} />
 }
